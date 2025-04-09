@@ -1,0 +1,78 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (448.0.16.0.3)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    reorder nameChildren = ["AirPods_Max", "Cassette_Tape", "Christmas_Ball", "Christmas_Hot_Chocolate__", "Christmas_tree_star", "Christmas_tree_toy", "School_Diary", "Teddy_bears"]
+    def "bear" (
+        active = true
+        prepend references = @bear.usda@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+    }
+
+    def "diary" (
+        active = true
+        prepend references = @diary.usda@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+    }
+
+    def "treeToy" (
+        active = true
+        prepend references = @treeToy.usda@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+    }
+
+    def "star" (
+        active = true
+        prepend references = @star.usda@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+    }
+
+    def "hotChoco" (
+        active = true
+        prepend references = @hotChoco.usda@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+    }
+
+    def "treeBall" (
+        active = true
+        prepend references = @treeBall.usda@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+    }
+
+    def "tape" (
+        active = true
+        prepend references = @tape.usda@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+    }
+
+    def "headphone" (
+        active = true
+        prepend references = @headphone.usda@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+    }
+}
+
