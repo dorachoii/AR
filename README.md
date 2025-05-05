@@ -14,7 +14,6 @@ https://www.youtube.com/shorts/xhghoX2gcs4
 <br>
 <br>
 
-
 ## 🛠 担当部分
 
 - ARインタラクション全体の設計と実装  
@@ -23,7 +22,7 @@ https://www.youtube.com/shorts/xhghoX2gcs4
 <br>
 <br>
 
-## 🦦 アピールポイントと挑戦課題
+## <span style="color:#FF6347">🦦 アピールポイントと挑戦課題</span>
 
 <details>
 <summary>① RealityKitにおける衝突管理</summary>
