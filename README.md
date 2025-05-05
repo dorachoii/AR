@@ -6,6 +6,7 @@
 
 ## 📹 プレイ動画
 https://www.youtube.com/shorts/xhghoX2gcs4
+[![Video Label](http://img.youtube.com/vi/'xhghoX2gcs4'/0.jpg)](https://youtu.be/'xhghoX2gcs4')
 
 
 ## 👥 開発人数
