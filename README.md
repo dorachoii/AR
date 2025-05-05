@@ -1,12 +1,13 @@
+
+<img width="524" alt="Screenshot 2025-04-09 at 4 25 01 PM" src="https://github.com/user-attachments/assets/1b539e90-f16a-4890-8f66-70be46d57e75" />
 ## 🧑‍🎤 一言紹介
 
 [SMバーチャルミュージシャン Naevis](https://naevisofficial.com/)のポップアップ展示体験用 **ARゲーム**。
 
 異世界から来た **Naevis に地球のものを教えて、親密度を上げる** コンセプト。
 
-## 📹 プレイ動画
+## 📺 プレイ動画
 https://www.youtube.com/shorts/xhghoX2gcs4
-[![Video Label](http://img.youtube.com/vi/'xhghoX2gcs4'/0.jpg)](https://youtu.be/'xhghoX2gcs4')
 
 
 ## 👥 開発人数
@@ -34,7 +35,8 @@ https://www.youtube.com/shorts/xhghoX2gcs4
 <details>
 <summary>① RealityKitにおける衝突管理</summary>
 
-![세로_1.gif](attachment:89ca35ca-217b-4add-9d70-b2d465f6b977:세로_1.gif)
+![세로_1](https://github.com/user-attachments/assets/a3d5be06-4bb8-4fd8-8df9-3e0eda6d3e58)
+
 
 ### 🔧 実装概要
 
@@ -113,7 +115,8 @@ private func handleCollision(event: CollisionEvents.Began) {
 
 <details>
 <summary>② RealityKitにおけるModelEntityのアニメーション制御</summary>
-![Blenderからエクスポート](attachment:c39165c4-a24c-4be0-9ec4-4198162b23ea:01_ISSAC_1.gif)
+![01_ISSAC_1 (2)](https://github.com/user-attachments/assets/c5b7f744-e5d9-495f-8378-b8add99f1a7d)
+
 
 
 ### 🔧 実装概要
@@ -133,7 +136,8 @@ if let naevis = naevis, let animation = naevis.availableAnimations.first {
 <details>
 <summary>③ Reality Composer Proを活用したパーティクルの生成</summary>
 
-![Reality Composer Pro](attachment:c9e5cf40-e099-4662-9a89-212ef540b2f8:01_ISSAC.gif)
+![01_ISSAC (1)](https://github.com/user-attachments/assets/f3ee5d02-0e5f-45d2-85b5-862eca0e159a)
+
 
 
 ### 🔧 実装概要
