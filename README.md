@@ -80,7 +80,7 @@ func loadEntity(modelName: String) {
     view?.installGestures(for: entity)
     decoAnchor.addChild(entity)
 }
-
+```
 ```swift
 // MARK: - 衝突処理
 private func handleCollision(event: CollisionEvents.Began) {
@@ -107,8 +107,9 @@ private func handleCollision(event: CollisionEvents.Began) {
         self?.processedEntities.remove(ObjectIdentifier(pairIdentifier as AnyObject))
     }
 }
-
+```
 </details>
+
 <details>
 <summary>② RealityKitにおけるModelEntityのアニメーション制御</summary>
 ![Blenderからエクスポート](attachment:c39165c4-a24c-4be0-9ec4-4198162b23ea:01_ISSAC_1.gif)
@@ -126,6 +127,7 @@ Reality Composer Proには、UnityのAnimatorのように、アニメーショ�
 if let naevis = naevis, let animation = naevis.availableAnimations.first {
      naevis.playAnimation(animation.repeat(count: 1), transitionDuration: 0.5, startsPaused: false)
 }
+```
 </details>
 <details>
 <summary>③ Reality Composer Proを活用したパーティクルの生成</summary>
@@ -140,7 +142,7 @@ RealityComposerProで作成したパーティクルを.usdz形式でエクスポ
 ```swift
 // RealityComposerProで作成したパーティクルを.usdzとしてエクスポート、ModelEntityとして生成する方法
 let FX = try! ModelEntity.load(named: "heartFX")
-
+```
 </details>
 ## 🔎 振り返り
 ###学んだこと
