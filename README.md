@@ -22,7 +22,7 @@ https://www.youtube.com/shorts/xhghoX2gcs4
 <br>
 <br>
 
-## <span style="color:#FF6347">🦦 アピールポイントと挑戦課題</span>
+## 🦦 アピールポイントと挑戦課題
 
 <details>
 <summary>① RealityKitにおける衝突管理</summary>
