@@ -107,7 +107,8 @@ private func handleCollision(event: CollisionEvents.Began) {
 
 <details>
 <summary>② RealityKitにおけるModelEntityのアニメーション制御</summary>
-![01_ISSAC_1 (2)](https://github.com/user-attachments/assets/c5b7f744-e5d9-495f-8378-b8add99f1a7d)
+![01_ISSAC_1 (2)](https://github.com/user-attachments/assets/503cd4ac-608a-41f5-93e3-1e32cc14b3fb)
+
 
 
 
