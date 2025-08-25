@@ -1,161 +1,22 @@
+## 📦 Project Information
+- **Platform**: iOS  
+- **Duration**: 2週、チーム制作（プログラミング全般担当）
 
-<img width="524" alt="Screenshot 2025-04-09 at 4 25 01 PM" src="https://github.com/user-attachments/assets/1b539e90-f16a-4890-8f66-70be46d57e75" />
+### 📸 Screenshots
+<img src="https://github.com/user-attachments/assets/1b539e90-f16a-4890-8f66-70be46d57e75" alt="Screenshot 2025-04-09 at 4 25 01 PM" width="800"/>
 
-## 🧑‍🎤 一言紹介
 
-[SMバーチャルミュージシャン Naevis](https://naevisofficial.com/)のポップアップ展示体験用 **ARゲーム**。
-
-異世界から来た **Naevis に地球のものを教えて、親密度を上げる** コンセプト。
-<br>
-<br>
-
-## 📺 プレイ動画
+### 📸 Playing Video
 https://www.youtube.com/shorts/xhghoX2gcs4
-<br>
-<br>
 
-## 🛠 担当部分
-
-- ARインタラクション全体の設計と実装  
-- Reality Composer Pro を用いたパーティクルエフェクトの制作  
-- Xcode 上で `.usdz` アニメーションおよびグラフィック制御の実装  
-<br>
-<br>
-
-## 🦦 アピールポイントと挑戦課題
-
-<details>
-<summary>① RealityKitにおける衝突管理</summary>
-
-![세로_1](https://github.com/user-attachments/assets/a3d5be06-4bb8-4fd8-8df9-3e0eda6d3e58)
+---
 
 
-### 🔧 実装概要
+## 📖 Game Overview
 
-キャラクターとアイテムが衝突した際に、アイテムが消える処理をRealityKitで実装しました。
-
-### 🔧 UnityとRealityKitの違い
-
-- `Unity`: 各GameObjectのComponentで処理
-- `RealityKit`: 全体のCollisionEventで処理
-
-Unityでは、ゲームオブジェクトにコンポーネントとしてスクリプトをアタッチする形式のため、**衝突した主体のオブジェクトと衝突されたオブジェクトを明確に区別**することができます。
-
-しかし、RealityKitでは衝突イベント`Collision Event`自体を検知し、特定のルールで`entityA`と`entityB`が割り当てられる仕組みになっています。それで、キャラクターとアイテムが衝突した際に、ランダムでキャラクターが消えてしまいました。
-
-そこで、Entityを生成する際**、**名前を付けておき、衝突時にその名前を基準に削除することで、この問題を解決しました。
+<img src="https://github.com/user-attachments/assets/01197cc5-7ffb-4c7a-bb57-65c9cec526ca" alt="segaPPT-4-1" width="800"/>
+<img src="https://github.com/user-attachments/assets/20b677fb-1bf3-435b-bf01-e6f195b078ab" alt="segaPPT-4-2" width="800"/>
 
 
 
-### 💻 ソースコード
-
-```swift
-//MARK: - Entityを生成する関数
-func loadEntity(modelName: String) {
-    guard let decoAnchor = decoAnchor else { return }
-
-    let entity = try! ModelEntity.loadModel(named: "\(modelName)")
-
-    // 衝突判定に必要① CollisionShapeの生成
-    entity.generateCollisionShapes(recursive: true)
-
-    // 衝突判定に必要② CollisionComponentの設定 - mode: trigger 
-    entity.collision = CollisionComponent(
-        shapes: [.generateBox(size: [0.2, 0.2, 0.2])],
-        mode: .trigger,
-        filter: .sensor
-    )
-
-    // 衝突判定に必要③ PhysicsBodyComponentの追加  - mode: dynamic
-    entity.physicsBody = PhysicsBodyComponent(massProperties: .default, mode: .dynamic)
-
-    // 衝突時に識別できるように名前を設定
-    entity.name = "deco"
-
-    view?.installGestures(for: entity)
-    decoAnchor.addChild(entity)
-}
-```
-```swift
-// MARK: - 衝突処理
-private func handleCollision(event: CollisionEvents.Began) {
-    guard let entityA = event.entityA as? ModelEntity,
-          let entityB = event.entityB as? ModelEntity else { return }
-
-    // キャラクターモデルのColliderが複数重なっており、衝突が重複発生
-    // hash識別子で一度だけ処理されるように制御
-    let pairIdentifier = entityA.hashValue ^ entityB.hashValue
-    guard !processedEntities.contains(ObjectIdentifier(pairIdentifier as AnyObject)) else { return }
-    processedEntities.insert(ObjectIdentifier(pairIdentifier as AnyObject))
-
-    // "deco"だけを消すように条件分岐
-    if (entityA.name == "naevis" && entityB.name == "deco") {
-        entityB.removeFromParent()
-        loadFXEntity()
-    } else if (entityA.name == "deco" && entityB.name == "naevis") {
-        entityA.removeFromParent()
-        loadFXEntity()
-    }
-
-    // 一定時間後に識別子をクリアして再衝突可能に
-    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
-        self?.processedEntities.remove(ObjectIdentifier(pairIdentifier as AnyObject))
-    }
-}
-```
-</details>
-
-<details>
-<summary>② RealityKitにおけるModelEntityのアニメーション制御</summary>
-    
-![i](https://github.com/user-attachments/assets/29ec4685-a02b-44b2-94a1-ae1ecd1696ea)
-
-
-
-### 🔧 実装概要
-Reality Composer Proには、UnityのAnimatorのように、アニメーション状態を一元管理する機能がなかったため、コードベースで実装しました。
-
-また、Blender側で複数のアニメーションを配列として格納し、それをRealityKit側で切り替える方法が存在する可能性がありますが、現時点ではその具体的な実装方法がわかりませんでした。
-
-
-### 💻 ソースコード
-```swift
-// .usdzファイルに埋め込まれたアニメーション再生
-if let naevis = naevis, let animation = naevis.availableAnimations.first {
-     naevis.playAnimation(animation.repeat(count: 1), transitionDuration: 0.5, startsPaused: false)
-}
-```
-</details>
-<details>
-<summary>③ Reality Composer Proを活用したパーティクルの生成</summary>
-
-![01_ISSAC (1)](https://github.com/user-attachments/assets/f3ee5d02-0e5f-45d2-85b5-862eca0e159a)
-
-
-
-### 🔧 実装概要
-RealityComposerProで作成したパーティクルを.usdz形式でエクスポートし、コードで読み込んで使用しました。
-
-### 💻 ソースコード
-```swift
-// RealityComposerProで作成したパーティクルを.usdzとしてエクスポート、ModelEntityとして生成する方法
-let FX = try! ModelEntity.load(named: "heartFX")
-```
-</details>
-
-<br>
-<br>
-
-## 🔎 振り返り
-
-### 学んだこと
-- Unityなどのゲームエンジンではなく、Xcode上で3Dインタラクションを実装してみました。
-- RealityKitで使用できる拡張子は一般的に使われる.fbxではなく.usdzであるため、マテリアルやアニメーションを.usdzに合わせて変換して抽出する過程で苦労しましたが、3D拡張子についての理解を深めることができました。
-- 3Dモデルファイルが大きいため、アプリがクラッシュする問題がありましたが、非同期ロード処理などで改善しました。
-<br>
-
-### 改善点
-- 多様なアニメーションを実装したかったのですが、RealityKitのアニメーションに関する内部構造の情報が少なく、最終的に2種類のアニメーションを繰り返すだけになってしまったのが残念でした。
-- ARKitの座標系についてはまだ理解が不十分で、分析を試みたものの、表面でのアイテムのスポーン位置が毎回異なってしまいます。
-- Unityでの衝突処理には慣れているのですが、RealityKitにおいては、衝突オブジェクトであるEntityAとEntityBをどのようにフィルタリングして処理するか悩んでおり、現在の実装が最適だとは思っていません。
 
